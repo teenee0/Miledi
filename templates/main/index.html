@@ -1,0 +1,98 @@
+{% load static %}
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %} {% endblock %}</title>
+</head>
+<body>
+    <header>Привет</header>
+    {% block main %}
+    {% endblock %}
+
+</body>
+</html>
+<div class="container" style="margin-top:30px;">
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <h2>Сортировка по типу одежды</h2>
+            <form method="get" action="">
+                <select name="type" class="form-control" onchange="this.form.submit()">
+                    <option value="">Все</option>
+                    {% for type in types %}
+                        <option value="{{ type }}" {% if type == request.GET.type %}selected{% endif %}>{{ type }}</option>
+                    {% endfor %}
+                </select>
+            </form>
+        </div>
+    </div>
+    {% for product in products %}
+        <div class="row">
+            <div class="col-6 col-md-3" >
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="{{ product.img.url }}" alt="nepal_canvas_tote_bag_blue">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.title }}
+                            <p>_____</p>
+                            <p>$3000</p>
+                        </h5>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+<img src="{% static 'main/img/logo-miledi.png' %}" alt="Miledi Logo" class="brand-logo" style="height: 100px;width: 130px">
+<nav class="navbar navbar-light navbar-expand-lg fixed-top bg-light">
+    <a href="#" class="navbar-brand">Miledi</a>
+
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav m-auto">
+            <li class="navbar-item">
+                <a href="#" class="nav-link">HOME</a>
+            </li>
+            <li class="navbar-item">
+                <a href="#location" class="nav-link">LOCATION</a>
+            </li>
+            <li class="navbar-item">
+                <a href="#contact" class="nav-link">CONTACT</a>
+            </li>
+        </ul>
+    </div>
+    <!---------------SOCIAL MEDIA ICONS--------------------->
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav m-auto">
+            <li><a href="https://www.instagram.com/miledi203_2_kokshetau?igsh=MW9idWNpNm1xaHM4Mg==" class="fab fa-instagram fa-2x" style="color: black; text-decoration: none"></a></li>
+        </ul>
+    </div>
+</nav>
+<br>
+<br>
+<li class="nav-item">
+    <a href="tel:1234567890" class="nav-link fas fa-phone-square"  style="font-size: 1.5rem;" ><p style="font-weight: normal; display: inline; margin: 0;"> Позвонить</p></a>
+</li>
+
+
+
+
+<div class="container" style="margin-top:30px;">
+
+    <div class="row">
+        {% for product in products %}
+            <div class="col">
+                <div class="card">
+                    <img class="card-img-top" src="{{ product.img.url }}" alt="{{ product.title }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.title }}</h5>
+                        <p>_____</p>
+                        <p class="card-title">{{ product.price }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
